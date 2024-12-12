@@ -2,13 +2,7 @@ import UIKit
 
 // TODO
 protocol BlogFlowCoordinatorDependencies  {
-//    func makeMoviesListViewController(
-//        actions: MoviesListViewModelActions
-//    ) -> MoviesListViewController
-//    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController
-//    func makeMoviesQueriesSuggestionsListViewController(
-//        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-//    ) -> UIViewController
+    func makeBlogsListTableViewController(actions:BlogListViewModelActions) -> BlogListTableViewController
 }
 
 final class BlogFlowFlowCoordinator {
@@ -17,7 +11,6 @@ final class BlogFlowFlowCoordinator {
     private let dependencies: BlogFlowCoordinatorDependencies
 
     private weak var blogListVC: BlogListTableViewController?
-    private weak var moviesQueriesSuggestionsVC: UIViewController?
 
     init(navigationController: UINavigationController,
          dependencies: BlogFlowCoordinatorDependencies) {
@@ -27,21 +20,24 @@ final class BlogFlowFlowCoordinator {
     
     func start() {
         // Note: here we keep strong reference with actions, this way this flow do not need to be strong referenced
-//        let actions = MoviesListViewModelActions(showMovieDetails: showMovieDetails,
-//                                                 showMovieQueriesSuggestions: showMovieQueriesSuggestions,
-//                                                 closeMovieQueriesSuggestions: closeMovieQueriesSuggestions)
-//        let vc = dependencies.makeMoviesListViewController(actions: actions)
-//
-//        navigationController?.pushViewController(vc, animated: false)
-//        moviesListVC = vc
+        let actions = BlogListViewModelActions(showBlogDetails: showBlogDetails,
+                                                 showBlogQueriesSuggestions: showBlogQueriesSuggestions,
+                                               closeBlogQueriesSuggestions: closeBlogQueriesSuggestions)
+        let vc = dependencies.makeBlogsListTableViewController(actions:actions)
+        
+        
+        vc.view.backgroundColor = .red
+        navigationController?.pushViewController(vc, animated: false)
+        blogListVC = vc
     }
-
-//    private func showMovieDetails(movie: Movie) {
+    
+    
+    private func showBlogDetails(movie: Blog) {
 //        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
 //        navigationController?.pushViewController(vc, animated: true)
-//    }
+    }
 
-//    private func showMovieQueriesSuggestions(didSelect: @escaping (MovieQuery) -> Void) {
+    private func showBlogQueriesSuggestions(didSelect: @escaping (BlogQuery) -> Void) {
 //        guard let moviesListViewController = moviesListVC, moviesQueriesSuggestionsVC == nil,
 //            let container = moviesListViewController.suggestionsListContainer else { return }
 //
@@ -50,11 +46,11 @@ final class BlogFlowFlowCoordinator {
 //        moviesListViewController.add(child: vc, container: container)
 //        moviesQueriesSuggestionsVC = vc
 //        container.isHidden = false
-//    }
+    }
 
-//    private func closeMovieQueriesSuggestions() {
+    private func closeBlogQueriesSuggestions() {
 //        moviesQueriesSuggestionsVC?.remove()
 //        moviesQueriesSuggestionsVC = nil
 //        moviesListVC?.suggestionsListContainer.isHidden = true
-//    }
+    }
 }

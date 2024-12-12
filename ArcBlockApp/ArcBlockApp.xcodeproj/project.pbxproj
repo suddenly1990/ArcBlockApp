@@ -30,17 +30,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B288E0552D0B033400D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = B288DEEC2D0AE7F700D541A4 /* ArcBlockApp */;
-		};
 		B288E05D2D0B085700D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockAppTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Application/DIContainer/BlogSceneDIContainer.swift,
+				Resource/data.json,
 			);
 			target = B288DF022D0AE7F900D541A4 /* ArcBlockAppTests */;
 		};
@@ -51,13 +45,20 @@
 			);
 			target = B288DF0C2D0AE7F900D541A4 /* ArcBlockAppUITests */;
 		};
+		B288E06C2D0B2E7D00D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B288DEEC2D0AE7F700D541A4 /* ArcBlockApp */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B288DEEF2D0AE7F700D541A4 /* ArcBlockApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				B288E0552D0B033400D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockApp" target */,
+				B288E06C2D0B2E7D00D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockApp" target */,
 				B288E05D2D0B085700D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockAppTests" target */,
 				B288E05E2D0B085700D541A4 /* Exceptions for "ArcBlockApp" folder in "ArcBlockAppUITests" target */,
 			);

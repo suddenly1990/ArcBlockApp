@@ -9,6 +9,15 @@ final class BlogListTableViewController: UITableViewController {
 
     // MARK: - Lifecycle
 
+    
+    static func create(
+        with viewModel: BlogListViewModel
+    ) -> BlogListTableViewController {
+        let vc = BlogListTableViewController.init()
+        vc.viewModel = viewModel
+        return vc
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()

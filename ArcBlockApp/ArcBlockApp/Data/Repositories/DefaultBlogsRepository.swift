@@ -2,15 +2,15 @@
 
 import Foundation
 
-final class DefaultMoviesRepository {
+final class DefaultBlogsRepository {
 
     private let dataTransferService: DataTransferService
-//    private let cache: MoviesResponseStorage
+//    private let cache: blogsResponseStorage
     private let backgroundQueue: DataTransferDispatchQueue
 
     init(
         dataTransferService: DataTransferService,
-//        cache: MoviesResponseStorage,
+//        cache: blogsResponseStorage,
         backgroundQueue: DataTransferDispatchQueue = DispatchQueue.global(qos: .userInitiated)
     ) {
         self.dataTransferService = dataTransferService
@@ -19,16 +19,16 @@ final class DefaultMoviesRepository {
     }
 }
 
-//extension DefaultMoviesRepository: MoviesRepository {
+//extension DefaultblogsRepository: blogsRepository {
 //    
-//    func fetchMoviesList(
+//    func fetchblogsList(
 //        query: MovieQuery,
 //        page: Int,
-//        cached: @escaping (MoviesPage) -> Void,
-//        completion: @escaping (Result<MoviesPage, Error>) -> Void
+//        cached: @escaping (blogsPage) -> Void,
+//        completion: @escaping (Result<blogsPage, Error>) -> Void
 //    ) -> Cancellable? {
 //
-//        let requestDTO = MoviesRequestDTO(query: query.query, page: page)
+//        let requestDTO = blogsRequestDTO(query: query.query, page: page)
 //        let task = RepositoryTask()
 //
 //        cache.getResponse(for: requestDTO) { [weak self, backgroundQueue] result in
@@ -38,7 +38,7 @@ final class DefaultMoviesRepository {
 //            }
 //            guard !task.isCancelled else { return }
 //
-//            let endpoint = APIEndpoints.getMovies(with: requestDTO)
+//            let endpoint = APIEndpoints.getblogs(with: requestDTO)
 //            task.networkTask = self?.dataTransferService.request(
 //                with: endpoint,
 //                on: backgroundQueue
