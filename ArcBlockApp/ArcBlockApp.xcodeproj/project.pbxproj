@@ -39,6 +39,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Application/DIContainer/BlogSceneDIContainer.swift,
+				Presentation/BlogScene/BlogList/ViewModel/BlogListDetailViewModel.swift,
 				Resource/data.json,
 				Resource/placeholder.png,
 			);
@@ -48,6 +49,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Application/DIContainer/BlogSceneDIContainer.swift,
+				Presentation/BlogScene/BlogList/ViewModel/BlogListDetailViewModel.swift,
 			);
 			target = B288DF0C2D0AE7F900D541A4 /* ArcBlockAppUITests */;
 		};

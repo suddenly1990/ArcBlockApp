@@ -14,16 +14,19 @@ protocol LocalConfigurable {
 struct DataConfig: LocalConfigurable {
     let fileName: String
     let imageUrl: String
+    let detailUrl: String
     var localData: Bool = true
     
      init(
         fileName: String,
         imageUrl:String,
+        detailUrl: String,
         localData: Bool = true
      ) {
         self.fileName = fileName
         self.localData = localData
-         self.imageUrl = imageUrl
+        self.imageUrl = imageUrl
+        self.detailUrl = detailUrl
     }
 }
 

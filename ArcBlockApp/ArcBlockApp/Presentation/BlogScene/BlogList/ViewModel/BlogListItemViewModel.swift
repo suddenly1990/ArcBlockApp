@@ -5,6 +5,7 @@ struct BlogListItemViewModel: Equatable {
     let title:String
     let labels:[String]
     var dateString: String?
+    var detailURL:String?
 }
 
 
@@ -16,6 +17,7 @@ extension BlogListItemViewModel {
         self.title = blog.title
         self.coverImagePath = blog.cover
         self.labels = blog.labels
+        self.detailURL = blog.slug
         self.dateString = formatDate(from: blog.publishTime)
     }
     

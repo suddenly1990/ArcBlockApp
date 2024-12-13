@@ -4,7 +4,7 @@ import UIKit
 protocol BlogFlowCoordinatorDependencies  {
     func makeBlogsListTableViewController(actions:BlogListViewModelActions) -> BlogListTableViewController
     
-    func makeBlogDetailsViewController(blog: Blog) -> BlogDetailsViewController
+    func makeBlogDetailsViewController(url: String) -> BlogDetailsViewController
 }
 
 final class BlogFlowFlowCoordinator {
@@ -28,8 +28,8 @@ final class BlogFlowFlowCoordinator {
     }
     
     
-    private func showBlogDetails(blog: Blog) {
-        let vc = dependencies.makeBlogDetailsViewController(blog: blog)
+    private func showBlogDetails(url: String) {
+        let vc = dependencies.makeBlogDetailsViewController(url: url)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

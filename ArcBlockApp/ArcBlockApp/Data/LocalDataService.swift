@@ -29,6 +29,7 @@ final class DefaultLocalService: BlogRepository {
             let pageBlogs = Array(self.blogs[startIndex..<endIndex]).map { blog in
                 var modifiedBlog = blog
                 modifiedBlog.cover = "\(self.localConfig.imageUrl)\(blog.cover)"
+                modifiedBlog.slug = "\(self.localConfig.detailUrl)\(blog.slug)"
                 return modifiedBlog
             }
             let totalPages = (self.blogs.count + pageSize - 1) / pageSize

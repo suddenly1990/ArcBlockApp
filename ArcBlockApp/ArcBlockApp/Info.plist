@@ -13,5 +13,7 @@
 	<string>https://www.arcblock.io/blog/uploads</string>
 	<key>requestURLKey</key>
 	<string>https://www.arcblock.io/content/api/blogs</string>
+	<key>detailURLKey</key>
+	<string>https://www.arcblock.io/blog/zh/</string>
 </dict>
 </plist>

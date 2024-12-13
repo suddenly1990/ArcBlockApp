@@ -27,7 +27,7 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
     }
 //    actions: actions
     func makeBlogsListViewModel(actions: BlogListViewModelActions) -> DefaultBlogListViewModel {
-        DefaultBlogListViewModel(fetchBlogsUseCaseFactory: makeBlogUseCase)
+        DefaultBlogListViewModel(fetchBlogsUseCaseFactory: makeBlogUseCase,actions: actions)
             
     }
     // MARK: - Use Cases
@@ -44,7 +44,7 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
         )
     }
     
-    func makeBlogDetailsViewController(blog: Blog) -> BlogDetailsViewController {
-        BlogDetailsViewController()
+    func makeBlogDetailsViewController(url: String) -> BlogDetailsViewController {
+        BlogDetailsViewController.create(with: url)
     }
 }

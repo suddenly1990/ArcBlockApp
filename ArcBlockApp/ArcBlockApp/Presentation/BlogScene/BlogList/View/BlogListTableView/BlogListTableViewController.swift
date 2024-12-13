@@ -55,6 +55,11 @@ final class BlogListTableViewController: UIViewController {
     private func setupBehaviours() {
         addBehaviors([BackButtonEmptyTitleNavigationBarBehavior(),
                       BlackStyleNavigationBarBehavior()])
+        // 自定义返回按钮标题为空
+       let backButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+       navigationItem.backBarButtonItem = backButton
+        // 改变返回按钮或导航栏按钮的颜色
+       navigationController?.navigationBar.tintColor = UIColor(hex: "#D5D5D5")
     }
     
     private func bind(to viewModel: DefaultBlogListViewModel) {
@@ -96,7 +101,8 @@ extension BlogListTableViewController:UITableViewDelegate,UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectItem(at: indexPath.row)
+        let item = viewModel.items.value[indexPath.row]
+        viewModel.didSelectItem(url: item.detailURL ?? "")
     }
 }
 

@@ -6,10 +6,12 @@ final class AppDIContainer {
     // MARK: -  localData
     lazy var dataService: DefaultLocalService = {
         let config = DataConfig(
-            fileName: appConfiguration.dataPath, imageUrl: appConfiguration.imageURL
+            fileName: appConfiguration.dataPath, imageUrl: appConfiguration.imageURL,detailUrl: appConfiguration.detailURL
         )
         return DefaultLocalService(config: config)
     }()
+    
+    
 
 //    // MARK: - DIContainers of scenes
     func makeBlogSceneDIContainer() -> BlogSceneDIContainer {

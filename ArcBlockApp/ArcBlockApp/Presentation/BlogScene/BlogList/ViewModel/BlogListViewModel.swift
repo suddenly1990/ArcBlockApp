@@ -1,7 +1,7 @@
 import Foundation
 
 struct BlogListViewModelActions {
-    let showBlogDetails: (Blog) -> Void
+    let showBlogDetails: (_ url: String) -> Void
 }
 
 enum BlogListViewModelLoading {
@@ -12,7 +12,7 @@ enum BlogListViewModelLoading {
 protocol BlogListViewModelInput {
     func viewWillAppear()
     func didLoadNextPage()
-    func didSelectItem(at index: Int)
+    func didSelectItem(url: String)
 }
 
 protocol BlogListViewModelOutput {
@@ -130,8 +130,8 @@ extension DefaultBlogListViewModel {
 //        load(BlogQuery: .init(query: query.value),
 //             loading: .nextPage)
     }
-    func didSelectItem(at index: Int) {
-//         actions?.showBlogDetails(pages[index])
+    func didSelectItem(url: String) {
+        actions?.showBlogDetails(url)
     }
 }
 

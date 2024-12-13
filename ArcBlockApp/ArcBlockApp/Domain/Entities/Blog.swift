@@ -18,7 +18,7 @@ struct Blog: Codable, Identifiable {
     let id: Identifier
     let latestCommenters: [String]
     let meta: Meta
-    let slug: String
+    var slug: String
     let title: String
     let author: String
     var cover: String
