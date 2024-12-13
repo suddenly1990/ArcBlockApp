@@ -2,6 +2,7 @@ import Foundation
 
 struct BlogListViewModelActions {
     let showBlogDetails: (_ url: String) -> Void
+    let showtagList: (_ tag: String) -> Void
 }
 
 enum BlogListViewModelLoading {
@@ -13,6 +14,8 @@ protocol BlogListViewModelInput {
     func viewWillAppear()
     func didLoadNextPage()
     func didSelectItem(url: String)
+    func didselctLabels(tag: String)
+    
 }
 
 protocol BlogListViewModelOutput {
@@ -132,6 +135,10 @@ extension DefaultBlogListViewModel {
     }
     func didSelectItem(url: String) {
         actions?.showBlogDetails(url)
+    }
+    
+    func didselctLabels(tag: String) {
+        actions?.showtagList(tag)
     }
 }
 

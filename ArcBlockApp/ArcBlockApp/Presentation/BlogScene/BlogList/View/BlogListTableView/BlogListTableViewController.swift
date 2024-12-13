@@ -91,7 +91,10 @@ extension BlogListTableViewController:UITableViewDelegate,UITableViewDataSource 
             assertionFailure("Cannot dequeue reusable cell \(BlogListItemCell.self) with reuseIdentifier: \(BlogListItemCell.reuseIdentifier)")
             return UITableViewCell()
         }
-        
+        cell.onTagSelected = { [weak self] selectedTag in
+            print("Selected tag: \(selectedTag)")
+            self?.viewModel.didselctLabels(tag: selectedTag)
+        }
         if indexPath.row == viewModel.items.value.count - 1 {
             viewModel.didLoadNextPage()
         }

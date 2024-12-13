@@ -15,18 +15,21 @@ struct DataConfig: LocalConfigurable {
     let fileName: String
     let imageUrl: String
     let detailUrl: String
+    let labelUrl: String
     var localData: Bool = true
     
      init(
         fileName: String,
         imageUrl:String,
         detailUrl: String,
+        labelUrl:String,
         localData: Bool = true
      ) {
         self.fileName = fileName
         self.localData = localData
         self.imageUrl = imageUrl
         self.detailUrl = detailUrl
+        self.labelUrl = labelUrl
     }
 }
 

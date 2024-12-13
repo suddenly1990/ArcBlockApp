@@ -15,5 +15,7 @@
 	<string>https://www.arcblock.io/content/api/blogs</string>
 	<key>detailURLKey</key>
 	<string>https://www.arcblock.io/blog/zh/</string>
+	<key>labelBaseURLKey</key>
+	<string>https://www.arcblock.io/blog/tags/zh/</string>
 </dict>
 </plist>

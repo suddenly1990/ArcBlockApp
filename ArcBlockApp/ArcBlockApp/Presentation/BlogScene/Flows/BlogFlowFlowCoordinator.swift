@@ -5,6 +5,9 @@ protocol BlogFlowCoordinatorDependencies  {
     func makeBlogsListTableViewController(actions:BlogListViewModelActions) -> BlogListTableViewController
     
     func makeBlogDetailsViewController(url: String) -> BlogDetailsViewController
+    
+    func makeTagListViewController(tag: String) -> BlogDetailsViewController
+
 }
 
 final class BlogFlowFlowCoordinator {
@@ -21,7 +24,7 @@ final class BlogFlowFlowCoordinator {
     }
     
     func start() {
-        let actions = BlogListViewModelActions(showBlogDetails: showBlogDetails)
+        let actions = BlogListViewModelActions(showBlogDetails: showBlogDetails,showtagList: showtagList)
         let vc = dependencies.makeBlogsListTableViewController(actions:actions)
         navigationController?.pushViewController(vc, animated: false)
         blogListVC = vc
@@ -30,6 +33,11 @@ final class BlogFlowFlowCoordinator {
     
     private func showBlogDetails(url: String) {
         let vc = dependencies.makeBlogDetailsViewController(url: url)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func showtagList(tag: String) {
+        let vc = dependencies.makeTagListViewController(tag: tag)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

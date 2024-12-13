@@ -11,7 +11,7 @@ final class TagsView: UIView {
             }
         }
     }
-
+    var onTagSelected: ((String) -> Void)? // 添加标签点击回调
     private let collectionView: UICollectionView
     private var heightConstraint: Constraint? // 高度约束引用
     var heightDidChange: ((CGFloat) -> Void)? // 高度更新回调
@@ -38,6 +38,7 @@ final class TagsView: UIView {
         collectionView.delegate = self
         collectionView.register(TagCell.self, forCellWithReuseIdentifier: TagCell.reuseIdentifier)
         collectionView.isScrollEnabled = false // 禁止滚动，支持自适应高度
+        collectionView.isUserInteractionEnabled = true
 
         addSubview(collectionView)
 
@@ -68,6 +69,8 @@ extension TagsView: UICollectionViewDataSource {
         cell.configure(with: tags[indexPath.item])
         return cell
     }
+    
+   
 }
 
 final class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -99,6 +102,12 @@ extension TagsView: UICollectionViewDelegateFlowLayout {
         label.sizeToFit()
 
         return CGSize(width: label.frame.width + 16, height: label.frame.height + 8) // 增加内边距
+    }
+    
+    // 添加点击事件
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedTag = tags[indexPath.item]
+        onTagSelected?(selectedTag) // 调用回调
     }
 }
 

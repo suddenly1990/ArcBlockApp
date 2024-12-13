@@ -26,6 +26,14 @@ final class AppConfiguration {
        return detailURL
    }()
     
+    lazy var labelBaseURL: String = {
+       guard let labelBaseURL = Bundle.main.object(forInfoDictionaryKey: "labelBaseURLKey") as? String else {
+           fatalError("ApiKey must not be empty in plist")
+       }
+       print(labelBaseURL)
+       return labelBaseURL
+   }()
+    
     
     lazy var requestURL: String = {
        guard let requestURL = Bundle.main.object(forInfoDictionaryKey: "requestURLKey") as? String else {

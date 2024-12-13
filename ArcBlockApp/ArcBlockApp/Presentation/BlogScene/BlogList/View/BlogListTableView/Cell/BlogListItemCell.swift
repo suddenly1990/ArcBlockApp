@@ -12,7 +12,9 @@ final class BlogListItemCell: UITableViewCell {
     private var titleImageView: UIImageView!
     private var tagsView: TagsView! // 添加 TagsView
     private var line: UILabel!
-
+    
+    public var onTagSelected: ((String) -> Void)? // 标签点击回调
+    
     private var viewModel: BlogListItemViewModel!
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType = DispatchQueue.main
@@ -59,7 +61,16 @@ final class BlogListItemCell: UITableViewCell {
             
         }
         contentView.addSubview(tagsView)
+  
+        // 设置标签点击回调
+        self.onTagSelected = tagsView.onTagSelected
 
+        
+        tagsView.onTagSelected = { [weak self] selectedTag in
+            print("Selected tag: \(selectedTag)")
+            self?.onTagSelected?(selectedTag) // 调用回调
+        }
+        
         dateLabel = UILabel()
         dateLabel.font = UIFont.systemFont(ofSize: 12)
         dateLabel.textAlignment = .left
