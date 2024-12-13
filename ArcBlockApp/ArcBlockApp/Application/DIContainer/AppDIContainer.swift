@@ -6,7 +6,7 @@ final class AppDIContainer {
     // MARK: -  localData
     lazy var dataService: DefaultLocalService = {
         let config = DataConfig(
-           fileName: appConfiguration.dataPath
+            fileName: appConfiguration.dataPath, imageUrl: appConfiguration.imageURL
         )
         return DefaultLocalService(config: config)
     }()

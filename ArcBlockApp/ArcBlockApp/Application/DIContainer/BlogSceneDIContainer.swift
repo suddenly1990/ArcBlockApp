@@ -44,7 +44,6 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
         )
     }
     
-     // TODO
     func makeBlogDetailsViewController(blog: Blog) -> BlogDetailsViewController {
         BlogDetailsViewController()
     }

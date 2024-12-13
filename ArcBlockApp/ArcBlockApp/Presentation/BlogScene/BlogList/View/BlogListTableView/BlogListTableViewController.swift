@@ -1,9 +1,10 @@
 import UIKit
+import SnapKit
 
-final class BlogListTableViewController: UITableViewController {
+final class BlogListTableViewController: UIViewController {
 
     var viewModel: DefaultBlogListViewModel!
-
+    var tableView:UITableView?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: - Lifecycle
@@ -17,45 +18,67 @@ final class BlogListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        self.title = "最新文章"
+        setupTableView()
+        setupBehaviours()
+        bind(to: viewModel)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.viewModel.viewWillAppear()
     }
 
-    func reload() {
-        tableView.reloadData()
-    }
-
-    func updateLoading(_ loading: BlogListViewModelLoading?) {
-        switch loading {
-        case .nextPage:
-            nextPageLoadingSpinner?.removeFromSuperview()
-            nextPageLoadingSpinner = makeActivityIndicator(size: .init(width: tableView.frame.width, height: 44))
-            tableView.tableFooterView = nextPageLoadingSpinner
-        case .fullScreen, .none:
-            tableView.tableFooterView = nil
-        }
-    }
-
-    // MARK: - Private
-
-    private func setupViews() {
+    // UI
+    private func setupTableView() {
+        // 初始化 UITableView
+        self.tableView = UITableView()
+        guard let tableView = self.tableView else { return }
+        
+        // 配置 UITableView 的属性
         tableView.estimatedRowHeight = BlogListItemCell.height
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(BlogListItemCell.self, forCellReuseIdentifier: BlogListItemCell.reuseIdentifier)
+        tableView.separatorStyle = .none 
+        // 添加到视图
+        view.addSubview(tableView)
+
+        // 使用 SnapKit 进行布局
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        // 设置 UITableView 的数据源和代理
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    
+    private func setupBehaviours() {
+        addBehaviors([BackButtonEmptyTitleNavigationBarBehavior(),
+                      BlackStyleNavigationBarBehavior()])
+    }
+    
+    private func bind(to viewModel: DefaultBlogListViewModel) {
+        viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems()
+        }
+    }
+    private func updateItems() {
+        self.reload()
+    }
+
+    func reload() {
+        self.tableView?.reloadData()
     }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension BlogListTableViewController {
+extension BlogListTableViewController:UITableViewDelegate,UITableViewDataSource {
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.items.value.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: BlogListItemCell.reuseIdentifier,
             for: indexPath
@@ -63,18 +86,26 @@ extension BlogListTableViewController {
             assertionFailure("Cannot dequeue reusable cell \(BlogListItemCell.self) with reuseIdentifier: \(BlogListItemCell.reuseIdentifier)")
             return UITableViewCell()
         }
+        
         if indexPath.row == viewModel.items.value.count - 1 {
             viewModel.didLoadNextPage()
         }
+        cell.fill(with:viewModel.items.value[indexPath.row])
 
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return viewModel.isEmpty ? tableView.frame.height : super.tableView(tableView, heightForRowAt: indexPath)
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.didSelectItem(at: indexPath.row)
+    }
+}
+
+
+extension UIColor {
+    static func random() -> UIColor {
+        let red = CGFloat.random(in: 0...1)
+        let green = CGFloat.random(in: 0...1)
+        let blue = CGFloat.random(in: 0...1)
+        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }

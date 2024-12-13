@@ -26,7 +26,11 @@ final class DefaultLocalService: BlogRepository {
                 return
             }
             // 计算当前页的数据
-            let pageBlogs = Array(self.blogs[startIndex..<endIndex])
+            let pageBlogs = Array(self.blogs[startIndex..<endIndex]).map { blog in
+                var modifiedBlog = blog
+                modifiedBlog.cover = "\(self.localConfig.imageUrl)\(blog.cover)"
+                return modifiedBlog
+            }
             let totalPages = (self.blogs.count + pageSize - 1) / pageSize
              let blogPage = BlogPage(page: page, totalPages: totalPages, blogs: pageBlogs)
           completion(.success(blogPage))

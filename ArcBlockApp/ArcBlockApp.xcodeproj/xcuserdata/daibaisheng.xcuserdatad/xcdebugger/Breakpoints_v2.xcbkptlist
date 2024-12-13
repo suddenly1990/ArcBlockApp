@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3E8ECB07-88DB-473C-94F7-BED06F9C166A"
-            shouldBeEnabled = "Yes"
+            uuid = "C0F4713F-B3F5-47C6-8E6C-57D7C9E7FD07"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ArcBlockApp/Presentation/BlogScene/BlogList/ViewModel/BlogListViewModel.swift"
+            filePath = "ArcBlockApp/Data/LocalDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "didLoadNextPage()"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "loadLocalData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7A5C26AB-539F-45C3-8B37-8C794CD8552A"
-            shouldBeEnabled = "Yes"
+            uuid = "9BD47632-B6C5-49FA-99D1-8DD4F34BE001"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ArcBlockApp/Presentation/BlogScene/BlogList/View/BlogListTableView/BlogListTableViewController.swift"
+            filePath = "ArcBlockApp/Data/LocalDataService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "loadLocalData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

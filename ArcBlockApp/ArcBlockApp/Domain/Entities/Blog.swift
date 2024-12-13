@@ -21,7 +21,7 @@ struct Blog: Codable, Identifiable {
     let slug: String
     let title: String
     let author: String
-    let cover: String
+    var cover: String
     let excerpt: String
     let boardId: String
     let createdAt: String 
@@ -29,7 +29,7 @@ struct Blog: Codable, Identifiable {
     let commentCount: Int
     let type: String
     let status: String
-    let publishTime: Date
+    let publishTime: String
     let labels: [String]
     let locale: String
     
@@ -49,7 +49,7 @@ struct Blog: Codable, Identifiable {
         self.commentCount = try container.decode(Int.self, forKey: .commentCount)
         self.type = try container.decode(String.self, forKey: .type)
         self.status = try container.decode(String.self, forKey: .status)
-        self.publishTime = try container.decode(Date.self, forKey: .publishTime)
+        self.publishTime = try container.decode(String.self, forKey: .publishTime)
         self.labels = try container.decode([String].self, forKey: .labels)
         self.locale = try container.decode(String.self, forKey: .locale)
     }

@@ -40,6 +40,7 @@
 			membershipExceptions = (
 				Application/DIContainer/BlogSceneDIContainer.swift,
 				Resource/data.json,
+				Resource/placeholder.png,
 			);
 			target = B288DF022D0AE7F900D541A4 /* ArcBlockAppTests */;
 		};
