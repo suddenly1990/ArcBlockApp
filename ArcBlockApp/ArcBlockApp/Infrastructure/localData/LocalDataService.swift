@@ -7,50 +7,22 @@
 
 import Foundation
 
-enum LocalDataError: Error {
-    case error(statusCode: Int, data: Data?)
-    case cancelled
-}
-
-protocol LocalCancellable {
-    func cancel()
-}
-
-enum DataType: Int {
-    case JsonDdata
-}
-
-protocol localDataRequestable {
-    var path: String { get }
-    var dataType: DataType { get }
-}
-
-protocol LocalService {
-    typealias CompletionHandler = (Result<Data?, LocalDataError>) -> Void
-    
-    func request(localData: localDataRequestable, completion: @escaping CompletionHandler) -> LocalCancellable?
-}
-
-
 // MARK: - Implementation
 
-final class DefaultLocalService {
+final class DefaultLocalService: BlogRepository {
     
-    private let config: LocalConfigurable
+    let localConfig:LocalDataNetworkConfig
     
-    init(
-        config: LocalConfigurable
-    ) {
-        self.config = config
+    init(config:LocalDataNetworkConfig) {
+        self.localConfig = config
     }
-    // TODO
-//    private func request(
-//        localData: localDataRequestable,
-//        completion: CompletionHandler
-//    ) -> LocalCancellable {
-//        
-// 
-//    }
+    
+    func fetchBlogList(query: BlogQuery, page: Int, completion: @escaping (Result<BlogPage, any Error>) -> Void) -> (any Cancellable)? {
+        
+        
+        
+        return nil
+    }
     
 }
 

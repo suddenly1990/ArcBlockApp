@@ -4,18 +4,17 @@ final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     // MARK: -  localData
-    lazy var dataTransferService: DefaultLocalDataTransferService = {
+    lazy var dataService: DefaultLocalService = {
         let config = LocalDataNetworkConfig(
-            type: 0, fileName: "data.json"
+           fileName: appConfiguration.dataPath
         )
-        let localDataNetwork = DefaultLocalService(config: config)
-        return DefaultLocalDataTransferService(with: localDataNetwork)
+        return DefaultLocalService(config: config)
     }()
 
 //    // MARK: - DIContainers of scenes
     func makeBlogSceneDIContainer() -> BlogSceneDIContainer {
         let dependencies = BlogSceneDIContainer.Dependencies(
-            dataService: dataTransferService
+            dataService: dataService
         )
         return BlogSceneDIContainer(dependencies: dependencies)
     }

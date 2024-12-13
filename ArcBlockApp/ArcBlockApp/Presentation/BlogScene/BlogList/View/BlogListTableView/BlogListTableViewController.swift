@@ -2,16 +2,15 @@ import UIKit
 
 final class BlogListTableViewController: UITableViewController {
 
-    var viewModel: BlogListViewModel!
+    var viewModel: DefaultBlogListViewModel!
 
-//    var posterImagesRepository: PosterImagesRepository?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: - Lifecycle
 
     
     static func create(
-        with viewModel: BlogListViewModel
+        with viewModel:DefaultBlogListViewModel
     ) -> BlogListTableViewController {
         let vc = BlogListTableViewController.init()
         vc.viewModel = viewModel

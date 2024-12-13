@@ -7,5 +7,9 @@
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>pathKey</key>
+	<string>./Resource/data.json</string>
+	<key>baseURlKey</key>
+	<string>https://www.arcblock.io/blog/uploads</string>
 </dict>
 </plist>

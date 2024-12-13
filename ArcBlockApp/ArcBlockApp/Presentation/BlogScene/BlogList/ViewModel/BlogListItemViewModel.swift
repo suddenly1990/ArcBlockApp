@@ -1,24 +1,25 @@
-
 import Foundation
 
 struct BlogListItemViewModel: Equatable {
-    let title: String
-    let overview: String
-    let releaseDate: String
-    let posterImagePath: String?
+    let coverImagePath: String?
+    let title:String
+    let labels:[String]
+    var dateString: String?
 }
 
 extension BlogListItemViewModel {
 
     init(blog: Blog) {
-        self.title = blog.title ?? ""
-        self.posterImagePath = blog.posterPath
-        self.overview = blog.overview ?? ""
-        if let releaseDate = blog.releaseDate {
-            self.releaseDate = "\(NSLocalizedString("Release Date", comment: "")): \(dateFormatter.string(from: releaseDate))"
+        self.title = blog.title
+        self.coverImagePath = blog.cover
+        self.labels = blog.labels
+        self.dateString = blog.updatedAt
+        if let date = ISO8601DateFormatter().date(from: blog.updatedAt) {
+            self.dateString = dateFormatter.string(from: date)
         } else {
-            self.releaseDate = NSLocalizedString("To be announced", comment: "")
+            self.dateString = ""
         }
+    
     }
 }
 

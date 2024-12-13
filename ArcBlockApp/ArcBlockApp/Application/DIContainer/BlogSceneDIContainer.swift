@@ -10,14 +10,10 @@ import UIKit
 final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
     
     struct Dependencies {
-        let dataService: DefaultLocalDataTransferService
+        let dataService: DefaultLocalService
     }
 
     private let dependencies: Dependencies
-
-//    // MARK: - Persistent Storage
-//    TODO
-//    lazy var blogsQueriesStorage: blogsQueriesStorage = CoreDatablogsQueriesStorage(maxStorageLimit: 10)
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -30,7 +26,7 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
         )
     }
     
-    func makeMoviesListViewModel(actions: BlogListViewModelActions) -> BlogListViewModel {
+    func makeMoviesListViewModel(actions: BlogListViewModelActions) -> DefaultBlogListViewModel {
         DefaultBlogListViewModel(
             blogsUseCase: makeSearchMoviesUseCase(),
             actions: actions
@@ -38,7 +34,7 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
     }
     // MARK: - Use Cases
     func makeSearchMoviesUseCase() -> FetchBlogQueriesUseCase {
-        FetchBlogQueriesUseCase()
+        FetchBlogQueriesUseCase(blogsQueriesRepository: self.dependencies.dataService)
     }
 //    // MARK: - Flow Coordinators
     func makeBlogFlowCoordinator(navigationController: UINavigationController) -> BlogFlowFlowCoordinator {

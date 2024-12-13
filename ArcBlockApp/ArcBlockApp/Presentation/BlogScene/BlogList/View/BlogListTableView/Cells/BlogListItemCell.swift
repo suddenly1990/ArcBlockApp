@@ -23,14 +23,14 @@ final class BlogListItemCell: UITableViewCell {
 //        self.posterImagesRepository = posterImagesRepository
 
         titleLabel.text = viewModel.title
-        dateLabel.text = viewModel.releaseDate
-        overviewLabel.text = viewModel.overview
+//        dateLabel.text = viewModel.releaseDate
+//        overviewLabel.text = viewModel.overview
         updatePosterImage(width: Int(posterImageView.imageSizeAfterAspectFit.scaledSize.width))
     }
 
     private func updatePosterImage(width: Int) {
         posterImageView.image = nil
-        guard let posterImagePath = viewModel.posterImagePath else { return }
+//        guard let posterImagePath = viewModel.posterImagePath else { return }
 
 //        imageLoadTask = posterImagesRepository?.fetchImage(
 //            with: posterImagePath,
