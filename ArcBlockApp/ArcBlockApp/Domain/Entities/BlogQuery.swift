@@ -7,6 +7,9 @@
 import Foundation
 
 struct BlogQuery: Equatable {
-    let query: String
+    let size = 20
+    let local = "en"
+    let tagMatchStrategy = "all"
+    let sort = "-publishTime"
 }
 

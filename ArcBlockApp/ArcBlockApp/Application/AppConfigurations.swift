@@ -9,12 +9,22 @@ final class AppConfiguration {
         return pathKey
     }()
 
-     lazy var baseURl: String = {
-        guard let baseURL = Bundle.main.object(forInfoDictionaryKey: "baseURlKey") as? String else {
+     lazy var imageURL: String = {
+        guard let imageURL = Bundle.main.object(forInfoDictionaryKey: "ImageURlKey") as? String else {
             fatalError("ApiKey must not be empty in plist")
         }
-        print(baseURL)
-        return baseURl
+        print(imageURL)
+        return imageURL
     }()
+    
+    
+    lazy var requestURL: String = {
+       guard let requestURL = Bundle.main.object(forInfoDictionaryKey: "requestURLKey") as? String else {
+           fatalError("ApiKey must not be empty in plist")
+       }
+       print(requestURL)
+       return requestURL
+   }()
+
 
 }

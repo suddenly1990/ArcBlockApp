@@ -4,7 +4,6 @@
 //
 //  Created by 代百生 on 2024/12/12.
 //
-
 import Foundation
 
 
@@ -12,11 +11,16 @@ protocol LocalConfigurable {
     var fileName: String { get }
 }
 
-struct LocalDataNetworkConfig: LocalConfigurable {
+struct DataConfig: LocalConfigurable {
     let fileName: String
+    var localData: Bool = true     
      init(
-        fileName: String
+        fileName: String,
+        localData: Bool = true
      ) {
         self.fileName = fileName
+        self.localData = localData
     }
 }
+
+

@@ -11,14 +11,18 @@ final class FetchBlogQueriesUseCase: UseCase {
     
     func start() -> Cancellable? {
         return blogsQueriesRepository.fetchBlogList(
-            query: BlogQuery.init(query: "11111"),
-            page: 1,
+            query: BlogQuery(),
+            page: 0,
             completion: { result in
-  
-                
-                
-                
-        })
-        return nil
+                switch result {
+                case .success(let blogPage):
+                    print("Fetched blogs: \(blogPage.totalPages)")
+                    // 在这里处理成功的结果，例如更新 UI
+                case .failure(let error):
+                    print("Error fetching blogs: \(error)")
+                    // 在这里处理错误，例如显示错误消息
+                }
+            }
+        )
     }
 }

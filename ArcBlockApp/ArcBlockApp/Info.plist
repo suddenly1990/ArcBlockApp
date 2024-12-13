@@ -9,7 +9,9 @@
 	</dict>
 	<key>pathKey</key>
 	<string>./Resource/data.json</string>
-	<key>baseURlKey</key>
+	<key>ImageURlKey</key>
 	<string>https://www.arcblock.io/blog/uploads</string>
+	<key>requestURLKey</key>
+	<string>https://www.arcblock.io/content/api/blogs</string>
 </dict>
 </plist>

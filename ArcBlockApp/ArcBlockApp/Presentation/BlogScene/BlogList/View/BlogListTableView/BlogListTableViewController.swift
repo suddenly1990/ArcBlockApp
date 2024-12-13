@@ -7,8 +7,6 @@ final class BlogListTableViewController: UITableViewController {
     var nextPageLoadingSpinner: UIActivityIndicatorView?
 
     // MARK: - Lifecycle
-
-    
     static func create(
         with viewModel:DefaultBlogListViewModel
     ) -> BlogListTableViewController {
@@ -20,6 +18,10 @@ final class BlogListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel.viewWillAppear()
     }
 
     func reload() {
@@ -61,10 +63,6 @@ extension BlogListTableViewController {
             assertionFailure("Cannot dequeue reusable cell \(BlogListItemCell.self) with reuseIdentifier: \(BlogListItemCell.reuseIdentifier)")
             return UITableViewCell()
         }
-
-//        cell.fill(with: viewModel.items.value[indexPath.row],
-//                  posterImagesRepository: posterImagesRepository)
-
         if indexPath.row == viewModel.items.value.count - 1 {
             viewModel.didLoadNextPage()
         }

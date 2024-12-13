@@ -10,7 +10,7 @@ enum BlogListViewModelLoading {
 }
 
 protocol BlogListViewModelInput {
-    func viewDidLoad()
+    func viewWillAppear()
     func didLoadNextPage()
     func didSelectItem(at index: Int)
 }
@@ -44,7 +44,6 @@ final class DefaultBlogListViewModel: BlogListViewModel {
    
 
     // MARK: - OUTPUT
-
     let items: Observable<[BlogListItemViewModel]> = Observable([])
     let loading: Observable<BlogListViewModelLoading?> = Observable(.none)
     let error: Observable<String> = Observable("")
@@ -68,8 +67,8 @@ final class DefaultBlogListViewModel: BlogListViewModel {
     // MARK: - Private
 
     private func appendPage(_ blogPage: BlogPage) {
-        currentPage = blogPage.page
-        totalPageCount = blogPage.totalPages
+//        currentPage = blogPage.page
+//        totalPageCount = blogPage.totalPages
 
 //        pages = pages
 //            .filter { $0.page != blogPage.page }
@@ -86,38 +85,22 @@ final class DefaultBlogListViewModel: BlogListViewModel {
         items.value.removeAll()
     }
 
-    private func load(blogQuery: BlogQuery, loading: BlogListViewModelLoading) {
-        self.loading.value = loading
-//        self.blogsUseCase.blogsQueriesRepository.fetchBlogList(query: blogQuery, page: 1) { Result<BlogPage, Error> in
-//                self?.mainQueue.async {
-//                    switch result {
-//                    case .success(let page):
-//                        self?.appendPage(page)
-//                    case .failure(let error):
-//                        self?.handle(error: error)
-//                    }
-//                    self?.loading.value = .none
-//                }
-//        }
-    }
-
     private func handle(error: Error) {
         self.error.value = error.isInternetConnectionError ?
             NSLocalizedString("No internet connection", comment: "") :
             NSLocalizedString("Failed loading Blog", comment: "")
     }
-
-    private func update(BlogQuery: BlogQuery) {
-        resetPages()
-//        load(BlogQuery: BlogQuery, loading: .fullScreen)
+    
+    private func updateBlogsQueries() {
+        self.blogsUseCase.start()
     }
 }
-
 // MARK: - INPUT. View event methods
-
 extension DefaultBlogListViewModel {
-
-    func viewDidLoad() { }
+    
+    func viewWillAppear() {
+        updateBlogsQueries()
+    }
 
     func didLoadNextPage() {
         guard hasMorePages, loading.value == .none else { return }

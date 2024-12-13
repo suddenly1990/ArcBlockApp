@@ -3,6 +3,8 @@ import UIKit
 // TODO
 protocol BlogFlowCoordinatorDependencies  {
     func makeBlogsListTableViewController(actions:BlogListViewModelActions) -> BlogListTableViewController
+    
+    func makeBlogDetailsViewController(blog: Blog) -> BlogDetailsViewController
 }
 
 final class BlogFlowFlowCoordinator {
@@ -26,8 +28,8 @@ final class BlogFlowFlowCoordinator {
     }
     
     
-    private func showBlogDetails(movie: Blog) {
-//        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-//        navigationController?.pushViewController(vc, animated: true)
+    private func showBlogDetails(blog: Blog) {
+        let vc = dependencies.makeBlogDetailsViewController(blog: blog)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
