@@ -6,6 +6,7 @@ struct BlogListItemViewModel: Equatable {
     let labels:[String]
     var dateString: String?
     var detailURL:String?
+    
 }
 
 

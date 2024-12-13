@@ -1,32 +1,27 @@
-//
-//  TagsView.swift
-//  ArcBlockApp
-//
-//  Created by 代百生 on 2024/12/13.
-//
-
 import UIKit
 import SnapKit
 
-class TagsView: UIView {
+final class TagsView: UIView {
 
-    // 数据源，存储标签内容
     var tags: [String] = [] {
         didSet {
             collectionView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.updateHeightConstraint()
+            }
         }
     }
 
     private let collectionView: UICollectionView
+    private var heightConstraint: Constraint? // 高度约束引用
+    var heightDidChange: ((CGFloat) -> Void)? // 高度更新回调
 
     override init(frame: CGRect) {
-        // 创建布局
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 8 // 标签之间的行间距
         layout.minimumInteritemSpacing = 8 // 标签之间的列间距
 
-        // 初始化 UICollectionView
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         super.init(frame: frame)
 
@@ -49,11 +44,20 @@ class TagsView: UIView {
         // 使用 SnapKit 设置约束
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            heightConstraint = make.height.equalTo(1).constraint // 初始化高度约束
         }
+    }
+
+    private func updateHeightConstraint() {
+        collectionView.layoutIfNeeded()
+        let contentHeight = collectionView.contentSize.height
+        heightConstraint?.update(offset: contentHeight)
+
+        // 通知父视图高度已更新
+        heightDidChange?(contentHeight)
     }
 }
 
-// MARK: - UICollectionViewDataSource
 extension TagsView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tags.count
@@ -66,10 +70,8 @@ extension TagsView: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
 extension TagsView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 动态计算标签的大小
         let label = UILabel()
         label.text = tags[indexPath.item]
         label.font = UIFont.systemFont(ofSize: 14)
@@ -79,8 +81,8 @@ extension TagsView: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - 自定义 Cell
-class TagCell: UICollectionViewCell {
+
+final class TagCell: UICollectionViewCell {
     static let reuseIdentifier = "TagCell"
 
     private let label = UILabel()

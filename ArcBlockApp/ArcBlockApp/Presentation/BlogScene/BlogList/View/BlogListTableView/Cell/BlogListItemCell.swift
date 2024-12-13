@@ -10,18 +10,16 @@ final class BlogListItemCell: UITableViewCell {
     private var titleLabel: UILabel!
     private var dateLabel: UILabel!
     private var titleImageView: UIImageView!
+    private var tagsView: TagsView! // 添加 TagsView
     private var line: UILabel!
 
     private var viewModel: BlogListItemViewModel!
-//    private var posterImagesRepository: PosterImagesRepository?
     private var imageLoadTask: Cancellable? { willSet { imageLoadTask?.cancel() } }
     private let mainQueue: DispatchQueueType = DispatchQueue.main
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-       self.selectionStyle = .none
-       
-
+        self.selectionStyle = .none
         setupViews()
         setupConstraints()
     }
@@ -40,26 +38,31 @@ final class BlogListItemCell: UITableViewCell {
         titleImageView.layer.shadowRadius = 4
         contentView.addSubview(titleImageView)
         titleImageView.backgroundColor = .blue
-        
+
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18) // 设置粗体 18 号字体
-        titleLabel.textColor = .black // 设置字体颜色
-        titleLabel.textAlignment = .left // 设置文字居中
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .left
         contentView.addSubview(titleLabel)
 
+        // 初始化 TagsView
+        tagsView = TagsView()
+        tagsView.heightDidChange = { [weak self] _ in
+            self?.setNeedsLayout()
+            self?.layoutIfNeeded()
+        }
+        contentView.addSubview(tagsView)
+
         dateLabel = UILabel()
-        dateLabel.font = UIFont.systemFont(ofSize: 12) // 设置粗体 18
-        dateLabel.textAlignment = .left // 设置文字居中
-        dateLabel.textColor = UIColor(hex: "#ACACAC") // 设置字体颜色
-        
+        dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.textAlignment = .left
+        dateLabel.textColor = UIColor(hex: "#ACACAC")
         contentView.addSubview(dateLabel)
 
-
-        line = UILabel() 
-        line.backgroundColor =  UIColor(hex: "#D5D5D5")
+        line = UILabel()
+        line.backgroundColor = UIColor(hex: "#D5D5D5")
         contentView.addSubview(line)
-
     }
 
     private func setupConstraints() {
@@ -68,21 +71,24 @@ final class BlogListItemCell: UITableViewCell {
             make.right.equalToSuperview().offset(-24)
             make.top.equalToSuperview().offset(15)
             make.height.equalTo(200)
-           
         }
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleImageView.snp.bottom).offset(16)
             make.left.equalTo(titleImageView.snp.left)
-            make.height.greaterThanOrEqualTo(30)
             make.right.equalTo(titleImageView.snp.right)
-//            make.bottom.equalToSuperview().offset(-10)
+        }
+
+        // TagsView 约束
+        tagsView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.left.equalTo(titleImageView.snp.left)
+            make.right.equalTo(titleImageView.snp.right)
         }
 
         dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(24)
+            make.top.equalTo(tagsView.snp.bottom).offset(16)
             make.left.equalTo(titleImageView.snp.left)
-            make.height.greaterThanOrEqualTo(1)
             make.right.equalTo(titleImageView.snp.right)
             make.bottom.equalToSuperview().offset(-10)
         }
@@ -94,30 +100,28 @@ final class BlogListItemCell: UITableViewCell {
             make.height.equalTo(1)
         }
     }
-    
-    func fill(
-        with viewModel: BlogListItemViewModel
-    ) {
+
+    func fill(with viewModel: BlogListItemViewModel) {
         self.viewModel = viewModel
         titleLabel.text = viewModel.title
         dateLabel.text = viewModel.dateString
-        configureImageContent(with:viewModel.coverImagePath)
+        tagsView.tags = viewModel.labels // 动态更新标签内容
+        configureImageContent(with: viewModel.coverImagePath)
     }
-    
+
     func configureImageContent(with url: String) {
-        let placeholderImage = UIImage(named: "placeholder") // 占位图
+        let placeholderImage = UIImage(named: "placeholder")
         let imageUrl = URL(string: url)
-        
-        titleImageView.kf.indicatorType = .activity // 显示加载指示器
-        
+
+        titleImageView.kf.indicatorType = .activity
         titleImageView.kf.setImage(
             with: imageUrl,
             placeholder: placeholderImage,
             options: [
-                .transition(.fade(0.2)), // 图片加载动画
-                .cacheOriginalImage, // 缓存原始图片
-                .scaleFactor(UIScreen.main.scale), // 根据屏幕缩放
-                .processor(DownsamplingImageProcessor(size: titleImageView.bounds.size)) // 图片下采样
+                .transition(.fade(0.2)),
+                .cacheOriginalImage,
+                .scaleFactor(UIScreen.main.scale),
+                .processor(DownsamplingImageProcessor(size: titleImageView.bounds.size))
             ],
             completionHandler: { result in
                 switch result {
@@ -132,9 +136,9 @@ final class BlogListItemCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        titleImageView.kf.cancelDownloadTask() // 取消未完成的下载任务
-        titleImageView.image = nil // 清除旧图片
-    } 
+        titleImageView.kf.cancelDownloadTask()
+        titleImageView.image = nil
+    }
 }
 
 extension UIColor {
