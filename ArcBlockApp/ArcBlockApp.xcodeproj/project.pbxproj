@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B288E0762D0C200200D541A4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B288E0752D0C200200D541A4 /* Kingfisher */; };
+		B288E0782D0C200200D541A4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B288E0772D0C200200D541A4 /* SnapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		B288DF042D0AE7F900D541A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -82,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B288E0762D0C200200D541A4 /* Kingfisher in Frameworks */,
+				B288E0782D0C200200D541A4 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +115,7 @@
 				B288DEEF2D0AE7F700D541A4 /* ArcBlockApp */,
 				B288DF062D0AE7F900D541A4 /* ArcBlockAppTests */,
 				B288DF102D0AE7F900D541A4 /* ArcBlockAppUITests */,
+				B288E0742D0C200200D541A4 /* Frameworks */,
 				B288DEEE2D0AE7F700D541A4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,6 +128,13 @@
 				B288DF0D2D0AE7F900D541A4 /* ArcBlockAppUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B288E0742D0C200200D541A4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +157,8 @@
 			);
 			name = ArcBlockApp;
 			packageProductDependencies = (
+				B288E0752D0C200200D541A4 /* Kingfisher */,
+				B288E0772D0C200200D541A4 /* SnapKit */,
 			);
 			productName = ArcBlockApp;
 			productReference = B288DEED2D0AE7F700D541A4 /* ArcBlockApp.app */;
@@ -225,6 +242,10 @@
 			);
 			mainGroup = B288DEE42D0AE7F700D541A4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B288E0722D0C059500D541A4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				B288E0732D0C1D1500D541A4 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B288DEEE2D0AE7F700D541A4 /* Products */;
 			projectDirPath = "";
@@ -594,6 +615,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B288E0722D0C059500D541A4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.2;
+			};
+		};
+		B288E0732D0C1D1500D541A4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B288E0752D0C200200D541A4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B288E0722D0C059500D541A4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		B288E0772D0C200200D541A4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B288E0732D0C1D1500D541A4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B288DEE52D0AE7F700D541A4 /* Project object */;
 }

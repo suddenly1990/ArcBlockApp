@@ -27,18 +27,27 @@ protocol BlogListViewModelOutput {
 
 typealias BlogListViewModel = BlogListViewModelInput & BlogListViewModelOutput
 
+
+typealias FetchBlogsUseCaseFactory = (
+    @escaping (FetchBlogQueriesUseCase.ResultValue) -> Void
+) -> UseCase
+
+
+
 final class DefaultBlogListViewModel: BlogListViewModel {
     
-    private let blogsUseCase: FetchBlogQueriesUseCase
     private let actions: BlogListViewModelActions?
     private let mainQueue: DispatchQueueType
     private var pages: BlogPage?
+    private let fetchBlogsUseCaseFactory: FetchBlogsUseCaseFactory
     
     var currentPage: Int = 0
     var totalPageCount: Int = 1
     var hasMorePages: Bool { currentPage < totalPageCount }
     var nextPage: Int { hasMorePages ? currentPage + 1 : currentPage }
 
+   
+    
    
     private var BlogLoadTask: Cancellable? { willSet { BlogLoadTask?.cancel() } }
    
@@ -55,13 +64,13 @@ final class DefaultBlogListViewModel: BlogListViewModel {
     // MARK: - Init
     
     init(
-        blogsUseCase: FetchBlogQueriesUseCase,
+        fetchBlogsUseCaseFactory: @escaping FetchBlogsUseCaseFactory,
         actions: BlogListViewModelActions? = nil,
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
-        self.blogsUseCase = blogsUseCase
         self.actions = actions
         self.mainQueue = mainQueue
+        self.fetchBlogsUseCaseFactory = fetchBlogsUseCaseFactory
     }
 
     // MARK: - Private
@@ -92,7 +101,21 @@ final class DefaultBlogListViewModel: BlogListViewModel {
     }
     
     private func updateBlogsQueries() {
-        self.blogsUseCase.start()
+
+        let completion: (FetchBlogQueriesUseCase.ResultValue) -> Void = { [weak self] result in
+            self?.mainQueue.async {
+                switch result {
+                case .success(let item):
+                    self?.items.value = item.blogs
+                        .map {$0}
+                        .map(BlogListItemViewModel.init)
+                case .failure:
+                    break
+                }
+            }
+        }
+        let useCase = fetchBlogsUseCaseFactory(completion)
+        useCase.start()
     }
 }
 // MARK: - INPUT. View event methods

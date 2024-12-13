@@ -7,6 +7,9 @@ struct BlogListItemViewModel: Equatable {
     var dateString: String?
 }
 
+
+
+
 extension BlogListItemViewModel {
 
     init(blog: Blog) {

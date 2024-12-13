@@ -22,20 +22,20 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
 //    // MARK: - blogs List
     func makeBlogsListTableViewController(actions:BlogListViewModelActions) -> BlogListTableViewController {
         BlogListTableViewController.create(
-            with: makeMoviesListViewModel(actions: actions)
+            with: makeBlogsListViewModel(actions: actions)
         )
     }
-    
-    func makeMoviesListViewModel(actions: BlogListViewModelActions) -> DefaultBlogListViewModel {
-        DefaultBlogListViewModel(
-            blogsUseCase: makeSearchMoviesUseCase(),
-            actions: actions
-        )
+//    actions: actions
+    func makeBlogsListViewModel(actions: BlogListViewModelActions) -> DefaultBlogListViewModel {
+        DefaultBlogListViewModel(fetchBlogsUseCaseFactory: makeBlogUseCase)
+            
     }
     // MARK: - Use Cases
-    func makeSearchMoviesUseCase() -> FetchBlogQueriesUseCase {
-        FetchBlogQueriesUseCase(blogsQueriesRepository: self.dependencies.dataService)
+    func makeBlogUseCase(completion: @escaping (FetchBlogQueriesUseCase.ResultValue) -> Void
+    ) -> UseCase {
+        FetchBlogQueriesUseCase(blogsQueriesRepository: self.dependencies.dataService,completion:completion)
     }
+    
 //    // MARK: - Flow Coordinators
     func makeBlogFlowCoordinator(navigationController: UINavigationController) -> BlogFlowFlowCoordinator {
         BlogFlowFlowCoordinator(
