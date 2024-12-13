@@ -6,7 +6,7 @@ final class BlogListTableViewController: UIViewController {
     var viewModel: DefaultBlogListViewModel!
     var tableView:UITableView?
     var nextPageLoadingSpinner: UIActivityIndicatorView?
-
+    var refreshControl:UIRefreshControl?
     // MARK: - Lifecycle
     static func create(
         with viewModel:DefaultBlogListViewModel
@@ -28,6 +28,8 @@ final class BlogListTableViewController: UIViewController {
         self.viewModel.viewWillAppear()
     }
 
+    
+    
     // UI
     private func setupTableView() {
         // 初始化 UITableView
@@ -50,7 +52,33 @@ final class BlogListTableViewController: UIViewController {
         // 设置 UITableView 的数据源和代理
         tableView.dataSource = self
         tableView.delegate = self
+        
+        
+        // 创建 UIRefreshControl
+      let refreshControl = UIRefreshControl()
+      
+      // 设置刷新时的文字
+      refreshControl.attributedTitle = NSAttributedString(string: "刷新中")
+      
+      // 添加目标和动作
+      refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+      
+      // 将 refreshControl 赋值给 tableView
+      self.refreshControl = refreshControl
+      tableView.refreshControl = refreshControl
     }
+    
+// 下拉触发的回调方法
+   @objc private func handleRefresh() {
+       print("开始刷新数据...")
+       
+       // 模拟网络请求，刷新数据
+       DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+           print("数据刷新完成！")
+           // 停止刷新动画
+           self.refreshControl?.endRefreshing()
+       }
+   }
     
     private func setupBehaviours() {
         addBehaviors([BackButtonEmptyTitleNavigationBarBehavior(),

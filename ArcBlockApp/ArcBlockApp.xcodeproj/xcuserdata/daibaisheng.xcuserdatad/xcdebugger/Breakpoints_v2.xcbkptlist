@@ -94,8 +94,8 @@
             filePath = "ArcBlockApp/Presentation/BlogScene/BlogList/View/BlogListTableView/BlogListTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "reload()"
             landmarkType = "7">
          </BreakpointContent>
