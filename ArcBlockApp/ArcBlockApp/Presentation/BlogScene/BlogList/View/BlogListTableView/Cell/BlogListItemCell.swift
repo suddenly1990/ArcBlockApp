@@ -5,7 +5,7 @@ import Kingfisher
 final class BlogListItemCell: UITableViewCell {
 
     static let reuseIdentifier = String(describing: BlogListItemCell.self)
-    static let height = CGFloat(130)
+    static let height = CGFloat(300)
 
     private var titleLabel: UILabel!
     private var dateLabel: UILabel!
@@ -51,6 +51,12 @@ final class BlogListItemCell: UITableViewCell {
         tagsView.heightDidChange = { [weak self] _ in
             self?.setNeedsLayout()
             self?.layoutIfNeeded()
+//        // 通知tableView更新此cell的高度
+           if let tableView = self?.findTableView() {
+               tableView.beginUpdates()
+               tableView.endUpdates()
+           }
+            
         }
         contentView.addSubview(tagsView)
 
@@ -65,6 +71,17 @@ final class BlogListItemCell: UITableViewCell {
         contentView.addSubview(line)
     }
 
+    private func findTableView() -> UITableView? {
+        var view = self.superview
+        while view != nil {
+            if let tableView = view as? UITableView {
+                return tableView
+            }
+            view = view?.superview
+        }
+        return nil
+    }
+    
     private func setupConstraints() {
         titleImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(24)
@@ -85,7 +102,14 @@ final class BlogListItemCell: UITableViewCell {
             make.left.equalTo(titleImageView.snp.left)
             make.right.equalTo(titleImageView.snp.right)
         }
-
+        
+        line.snp.makeConstraints { make in
+            make.left.equalTo(titleImageView.snp.left)
+            make.right.equalTo(titleImageView.snp.right)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+        
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(tagsView.snp.bottom).offset(16)
             make.left.equalTo(titleImageView.snp.left)
@@ -93,12 +117,7 @@ final class BlogListItemCell: UITableViewCell {
             make.bottom.equalToSuperview().offset(-10)
         }
 
-        line.snp.makeConstraints { make in
-            make.left.equalTo(titleImageView.snp.left)
-            make.right.equalTo(titleImageView.snp.right)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
+        
     }
 
     func fill(with viewModel: BlogListItemViewModel) {

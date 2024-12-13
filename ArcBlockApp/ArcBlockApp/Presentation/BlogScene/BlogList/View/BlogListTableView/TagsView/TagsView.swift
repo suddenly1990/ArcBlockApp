@@ -17,7 +17,7 @@ final class TagsView: UIView {
     var heightDidChange: ((CGFloat) -> Void)? // 高度更新回调
 
     override init(frame: CGRect) {
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedCollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 8 // 标签之间的行间距
         layout.minimumInteritemSpacing = 8 // 标签之间的列间距
@@ -67,6 +67,27 @@ extension TagsView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.reuseIdentifier, for: indexPath) as! TagCell
         cell.configure(with: tags[indexPath.item])
         return cell
+    }
+}
+
+final class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributes = super.layoutAttributesForElements(in: rect)
+        var leftMargin: CGFloat = sectionInset.left // 左边距
+        var maxY: CGFloat = -1.0 // 记录当前行的最大 Y 值
+
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.frame.origin.y >= maxY {
+                // 换行
+                leftMargin = sectionInset.left
+            }
+
+            layoutAttribute.frame.origin.x = leftMargin
+            leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+            maxY = max(layoutAttribute.frame.maxY, maxY)
+        }
+
+        return attributes
     }
 }
 
