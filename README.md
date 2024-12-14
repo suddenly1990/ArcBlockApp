@@ -45,7 +45,7 @@
 * **Data Repositories Layer** = Repositories Implementations + （datalayer）
 * **Presentation Layer (MVVM)** = ViewModels + Views
 
-####1. Domain Layer
+#### 1. Domain Layer
 
 **Domain 层**主要包含业务逻辑和实体模型。该层对业务规则进行定义和封装。
 
@@ -67,7 +67,7 @@
 层中仅定义访问数据的方式(纯业务层)，不关心底层数据的实现（如网络请求、本地数据），具体的实现细节由 Data 层去完成。
 
 
-####2. Data Layer
+#### 2. Data Layer
 
 **Data 层**主要包含数据加载部分，此处为数据提供方，由于本项目为了方便演示采用本地json数据，后续如果采用网络接口，网络接口只需要实现Domain Layer的BlogRepository接口即可切换成本极低。
 
@@ -77,7 +77,7 @@
 - `LocalDataService.swift`：本地数据服务，实现BlogRepository数据接口加载数来源。
 
 
-####3. Presentation Layer
+#### 3. Presentation Layer
 
 **Presentation Layer 层**主要包含页面展示部分，包括view以及viewmodel部分。
 
