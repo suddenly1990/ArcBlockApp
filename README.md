@@ -62,6 +62,10 @@
 * **Data Repositories Layer** = Repositories Implementations + （datalayer）
 * **Presentation Layer (MVVM)** = ViewModels + Views
 
+#### 依赖方向
+![依赖图](README_FILE/CleanArchitectureDependencies.png?raw=true "Modules Dependencies")
+
+
 #### 1. Domain Layer
 
 **Domain 层**主要包含业务逻辑和实体模型。该层对业务规则进行定义和封装。
