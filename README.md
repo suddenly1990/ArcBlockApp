@@ -28,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## 关于项目
 
-**ArcBlockApp** 是一个实现获取blog列表的应用程序，采用了 **Clean Architecture** 和 **MVVM** 设计模式。该项目旨在展示通过清晰的架构，并使用依赖注入（Dependency Injection）来来达到可测试，实现模块化，以及后续模块复用。
+**ArcBlockApp** 是一个实现获取blog列表的应用程序，可以点击分类标签以及详情进行跳转，采用了 **Clean Architecture** 和 **MVVM** 设计模式。该项目旨在展示通过清晰的架构，并使用依赖注入（Dependency Injection）来来达到可测试，实现模块化，以及后续模块复用。
 
 ### 项目设计思路
 

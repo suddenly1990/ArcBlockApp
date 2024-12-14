@@ -23,7 +23,7 @@ final class BlogListTableViewController: UIViewController {
         setupBehaviours()
         bind(to: viewModel)
         
-        self.viewModel.viewDidLoad()
+        handleRefresh()
     }
    
 
@@ -68,12 +68,12 @@ final class BlogListTableViewController: UIViewController {
 // 下拉触发的回调方法
    @objc private func handleRefresh() {
        print("开始刷新数据...")
-       
-       // 模拟网络请求，刷新数据
        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
-           print("数据刷新完成！")
            // 停止刷新动画
            self.refreshControl?.endRefreshing()
+           
+           self.viewModel.fetchData()
+           print("数据加载完成！")
        }
    }
     
@@ -101,7 +101,6 @@ final class BlogListTableViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
-
 extension BlogListTableViewController:UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -133,7 +132,6 @@ extension BlogListTableViewController:UITableViewDelegate,UITableViewDataSource 
         viewModel.didSelectItem(url: item.detailURL ?? "")
     }
 }
-
 
 extension UIColor {
     static func random() -> UIColor {

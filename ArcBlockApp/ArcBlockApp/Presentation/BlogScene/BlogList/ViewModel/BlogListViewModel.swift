@@ -11,7 +11,7 @@ enum BlogListViewModelLoading {
 }
 
 protocol BlogListViewModelInput {
-    func viewDidLoad()
+    func fetchData()
     func didLoadNextPage()
     func didSelectItem(url: String)
     func didselctLabels(tag: String)
@@ -104,7 +104,7 @@ final class DefaultBlogListViewModel: BlogListViewModel {
 // MARK: - INPUT. View event methods
 extension DefaultBlogListViewModel {
     
-    func viewDidLoad() {
+    func fetchData() {
         updateBlogsQueries()
     }
 

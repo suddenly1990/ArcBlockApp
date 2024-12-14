@@ -153,14 +153,7 @@ final class BlogListItemCell: UITableViewCell {
                 .scaleFactor(UIScreen.main.scale),
                 .processor(DownsamplingImageProcessor(size: titleImageView.bounds.size))
             ],
-            completionHandler: { result in
-                switch result {
-                case .success(let value):
-                    print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                case .failure(let error):
-                    print("Error loading image: \(error.localizedDescription)")
-                }
-            }
+            completionHandler: nil
         )
     }
 

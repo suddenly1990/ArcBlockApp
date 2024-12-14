@@ -5,7 +5,7 @@ final class AppConfiguration {
         guard let pathKey = Bundle.main.object(forInfoDictionaryKey: "pathKey") as? String else {
             fatalError("ApiKey must not be empty in plist")
         }
-        print(pathKey)
+//        print(pathKey)
         return pathKey
     }()
 
@@ -13,7 +13,7 @@ final class AppConfiguration {
         guard let imageURL = Bundle.main.object(forInfoDictionaryKey: "ImageURlKey") as? String else {
             fatalError("ApiKey must not be empty in plist")
         }
-        print(imageURL)
+//        print(imageURL)
         return imageURL
     }()
     
@@ -22,7 +22,7 @@ final class AppConfiguration {
        guard let detailURL = Bundle.main.object(forInfoDictionaryKey: "detailURLKey") as? String else {
            fatalError("ApiKey must not be empty in plist")
        }
-       print(detailURL)
+//       print(detailURL)
        return detailURL
    }()
     
@@ -30,7 +30,7 @@ final class AppConfiguration {
        guard let labelBaseURL = Bundle.main.object(forInfoDictionaryKey: "labelBaseURLKey") as? String else {
            fatalError("ApiKey must not be empty in plist")
        }
-       print(labelBaseURL)
+//       print(labelBaseURL)
        return labelBaseURL
    }()
     
@@ -39,7 +39,7 @@ final class AppConfiguration {
        guard let requestURL = Bundle.main.object(forInfoDictionaryKey: "requestURLKey") as? String else {
            fatalError("ApiKey must not be empty in plist")
        }
-       print(requestURL)
+//       print(requestURL)
        return requestURL
    }()
 
