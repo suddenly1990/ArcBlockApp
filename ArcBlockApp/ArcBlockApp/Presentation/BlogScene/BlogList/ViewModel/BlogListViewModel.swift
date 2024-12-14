@@ -11,7 +11,7 @@ enum BlogListViewModelLoading {
 }
 
 protocol BlogListViewModelInput {
-    func viewWillAppear()
+    func viewDidLoad()
     func didLoadNextPage()
     func didSelectItem(url: String)
     func didselctLabels(tag: String)
@@ -19,7 +19,7 @@ protocol BlogListViewModelInput {
 }
 
 protocol BlogListViewModelOutput {
-    var items: Observable<[BlogListItemViewModel]> { get } /// Also we can
+    var items: Observable<[BlogListItemViewModel]> { get } 
     var loading: Observable<BlogListViewModelLoading?> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
@@ -76,26 +76,6 @@ final class DefaultBlogListViewModel: BlogListViewModel {
         self.fetchBlogsUseCaseFactory = fetchBlogsUseCaseFactory
     }
 
-    // MARK: - Private
-
-    private func appendPage(_ blogPage: BlogPage) {
-//        currentPage = blogPage.page
-//        totalPageCount = blogPage.totalPages
-
-//        pages = pages
-//            .filter { $0.page != blogPage.page }
-//            + [blogPage]
-
-        // TODO
-//        items.value = pages.blogs.map(BlogListItemViewModel.init)
-    }
-
-    private func resetPages() {
-        currentPage = 0
-        totalPageCount = 1
-//        pages.removeAll()
-        items.value.removeAll()
-    }
 
     private func handle(error: Error) {
         self.error.value = error.isInternetConnectionError ?
@@ -124,7 +104,7 @@ final class DefaultBlogListViewModel: BlogListViewModel {
 // MARK: - INPUT. View event methods
 extension DefaultBlogListViewModel {
     
-    func viewWillAppear() {
+    func viewDidLoad() {
         updateBlogsQueries()
     }
 

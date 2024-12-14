@@ -22,14 +22,11 @@ final class BlogListTableViewController: UIViewController {
         setupTableView()
         setupBehaviours()
         bind(to: viewModel)
+        
+        self.viewModel.viewDidLoad()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.viewModel.viewWillAppear()
-    }
+   
 
-    
-    
     // UI
     private func setupTableView() {
         // 初始化 UITableView
