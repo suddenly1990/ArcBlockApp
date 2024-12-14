@@ -100,14 +100,15 @@
 
 ##### 3.1 view
 
-- `BlogWebViewController.swift,BlogListTableViewController`：webview控制器(跳转详情和类别),列表控制器(页面viewmodel绑定)
+- `BlogWebViewController.swift,BlogListTableViewController.swift`：webview控制器(跳转详情和类别),列表控制器(页面viewmodel绑定)
+- `BlogListItemCell.swift,TagsView.swift`：列表cellview,流式布局控件
 
 ##### 3.1 ViewModels
 - `BlogListViewModel.swift`：列表数据VIewmodel，负责数据到cell的viewModel转化。
 - `BlogListItemViewModel.swift` cell的viewModel。
 
 **说明:** **Presentation Layer**
-BlogDetailsViewController之所以归到view层下，是因为控制器主要也在在实现页面逻辑。
+BlogWebViewController 和 BlogDetailsViewController 被归入 View 层，是因为其中的业务逻辑已经被拆分，控制器的主要职责是处理页面的展示逻辑和用户交互。
 
 
 <!-- 运行项目 -->
