@@ -134,8 +134,8 @@ BlogWebViewController 和 BlogDetailsViewController 被归入 View 层，是因�
 <!-- USAGE EXAMPLES -->
 ## 使用
 
-1.进入项目根目录下，找到ArcBlockApp.xcodeproj
-2.使用Xcode打开工程根运行根目录下的ArcBlockApp.xcodeproj
+1. 进入项目根目录下，找到ArcBlockApp.xcodeproj
+2. 使用Xcode打开工程根运行根目录下的ArcBlockApp.xcodeproj
 
 <!-- LICENSE -->
 ## 许可
