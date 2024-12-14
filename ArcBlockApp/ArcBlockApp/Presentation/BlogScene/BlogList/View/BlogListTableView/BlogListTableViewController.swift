@@ -67,7 +67,7 @@ final class BlogListTableViewController: UIViewController {
     
 // 下拉触发的回调方法
    @objc private func handleRefresh() {
-       print("开始刷新数据...")
+       print("加载数据...")
        DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
            // 停止刷新动画
            self.refreshControl?.endRefreshing()
@@ -116,7 +116,6 @@ extension BlogListTableViewController:UITableViewDelegate,UITableViewDataSource 
             return UITableViewCell()
         }
         cell.onTagSelected = { [weak self] selectedTag in
-            print("Selected tag: \(selectedTag)")
             self?.viewModel.didselctLabels(tag: selectedTag)
         }
         if indexPath.row == viewModel.items.value.count - 1 {

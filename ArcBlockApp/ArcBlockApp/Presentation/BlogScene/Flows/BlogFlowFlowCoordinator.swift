@@ -4,9 +4,9 @@ import UIKit
 protocol BlogFlowCoordinatorDependencies  {
     func makeBlogsListTableViewController(actions:BlogListViewModelActions) -> BlogListTableViewController
     
-    func makeBlogDetailsViewController(url: String) -> BlogDetailsViewController
+    func makeBlogDetailsViewController(url: String) -> BlogWebViewController
     
-    func makeTagListViewController(tag: String) -> BlogDetailsViewController
+    func makeTagListViewController(tag: String) -> BlogWebViewController
 
 }
 

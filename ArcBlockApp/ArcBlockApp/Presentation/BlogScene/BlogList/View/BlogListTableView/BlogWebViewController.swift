@@ -1,5 +1,5 @@
 //
-//  BlogDetailsViewController.swift
+//  BlogWebViewController.swift
 //  ArcBlockApp
 //
 //  Created by 代百生 on 2024/12/13.
@@ -10,7 +10,7 @@ import WebKit
 import SnapKit
 
 
-class BlogDetailsViewController: UIViewController {
+class BlogWebViewController: UIViewController {
 
     // 创建一个 WKWebView
     private var webView: WKWebView!
@@ -19,8 +19,8 @@ class BlogDetailsViewController: UIViewController {
 
     static func create(
         with url:String
-    ) -> BlogDetailsViewController {
-        let vc = BlogDetailsViewController.init()
+    ) -> BlogWebViewController {
+        let vc = BlogWebViewController.init()
         vc.url = url
         return vc
     }
@@ -62,7 +62,7 @@ class BlogDetailsViewController: UIViewController {
 }
 
 // MARK: - WKNavigationDelegate
-extension BlogDetailsViewController: WKNavigationDelegate {
+extension BlogWebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("开始加载网页")
     }

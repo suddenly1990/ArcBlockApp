@@ -43,14 +43,14 @@ final class BlogSceneDIContainer: BlogFlowCoordinatorDependencies {
         )
     }
     
-    func makeBlogDetailsViewController(url: String) -> BlogDetailsViewController {
-        BlogDetailsViewController.create(with: url)
+    func makeBlogDetailsViewController(url: String) -> BlogWebViewController {
+        BlogWebViewController.create(with: url)
     }
     
-    func makeTagListViewController(tag: String) -> BlogDetailsViewController {
+    func makeTagListViewController(tag: String) -> BlogWebViewController {
         let labelBaseURL = self.dependencies.dataService.localConfig.labelUrl
         let url = "\(labelBaseURL)\(tag)"
-        return BlogDetailsViewController.create(with: url)
+        return BlogWebViewController.create(with: url)
     }
     
 }

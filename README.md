@@ -28,14 +28,29 @@
 <!-- ABOUT THE PROJECT -->
 ## 关于项目
 
-**ArcBlockApp** 是一个实现获取blog列表的应用程序，可以点击分类标签以及详情进行跳转，采用了 **Clean Architecture** 和 **MVVM** 设计模式。该项目旨在展示通过清晰的架构，并使用依赖注入（Dependency Injection）来来达到可测试，实现模块化，以及后续模块复用。
+# ArcBlockApp
 
-### 项目设计思路
+**ArcBlockApp** 是一个用于展示博客列表的应用程序，支持点击分类标签和博客详情页面进行跳转。  
+该项目采用 **Clean Architecture** 和 **MVVM** 设计模式，旨在通过清晰的架构设计，实现以下目标：
 
-1. 类与类模块与模块之间尽量采用协议进行接口，模块依赖尽量采用抽象接口不是具体的类
-2. 采用依赖注入（主要是提供类的初始化）方式，提供app注入管理类，向模块注入管理类提供基础服务（如数据服务等）。
-3. 控制器跳转要做统一协调,解耦依赖。
+- **可测试性**
+- **模块化开发**
+- **模块的高复用性**
 
+
+## 项目设计思路
+
+1. **模块解耦**：
+- 模块之间通过协议进行接口定义，避免直接依赖具体的类。
+- 类与类之间也尽量通过抽象接口（协议）实现解耦。
+
+2. **依赖注入**：
+- 使用依赖注入（Dependency Injection）进行类的初始化，确保模块的灵活性。
+- 提供应用级注入管理器，将基础服务（如数据服务等）注入到各模块中。
+
+3. **统一跳转管理**：
+- 控制器之间的跳转通过统一的协调器（Coordinator）进行管理。
+- 避免控制器直接耦合，提升项目的可维护性和扩展性。
 
 ### 项目架构
 
@@ -83,7 +98,7 @@
 
 ##### 3.1 view
 
-- `BlogDetailsViewController.swift,BlogListTableViewController`：webview控制器,列表控制器(页面viewmodel绑定)
+- `BlogWebViewController.swift,BlogListTableViewController`：webview控制器(跳转详情和类别),列表控制器(页面viewmodel绑定)
 
 ##### 3.1 ViewModels
 - `BlogListViewModel.swift`：列表数据VIewmodel，负责数据到cell的viewModel转化。

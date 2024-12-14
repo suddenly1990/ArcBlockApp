@@ -5,7 +5,7 @@ import Kingfisher
 final class BlogListItemCell: UITableViewCell {
 
     static let reuseIdentifier = String(describing: BlogListItemCell.self)
-    static let height = CGFloat(300)
+    static let height = CGFloat(100)
 
     private var titleLabel: UILabel!
     private var dateLabel: UILabel!
@@ -67,7 +67,6 @@ final class BlogListItemCell: UITableViewCell {
 
         
         tagsView.onTagSelected = { [weak self] selectedTag in
-            print("Selected tag: \(selectedTag)")
             self?.onTagSelected?(selectedTag) // 调用回调
         }
         
