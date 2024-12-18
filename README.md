@@ -274,3 +274,20 @@ The **Presentation Layer** handles the user interface and includes both **Views*
 1. Clone the project  
    ```sh
    git clone https://github.com/suddenly1990/ArcBlockApp.git
+<!-- USAGE EXAMPLES -->
+
+## Usage
+
+1. Navigate to the project root directory and locate the `ArcBlockApp.xcodeproj` file.  
+2. Open the `ArcBlockApp.xcodeproj` file using Xcode.  
+3. Wait for the required dependency packages to finish loading.  
+4. Select a real device or a simulator. Click the **Run** button (the triangle button) in Xcode, or use `Product -> Run` to launch the project.
+
+---
+
+<!-- LICENSE -->
+## License
+
+MIT License © 2024
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
