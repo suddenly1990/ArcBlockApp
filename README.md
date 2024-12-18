@@ -25,6 +25,15 @@
 </details>
 
 
+<!-- BUTTON TOGGLE -->
+<p align="right">
+<a href="#english-version"><button>English</button></a>
+<a href="#chinese-version"><button>中文</button></a>
+</p>
+
+---
+## About the Project / 关于项目 <a id="chinese-version"></a>
+
 <!-- ABOUT THE PROJECT -->
 ## 关于项目
 
@@ -146,3 +155,122 @@ MIT license Copyright (c) 2024
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## About the Project  <a id="english-version"></a>
+
+# ArcBlockApp
+
+**ArcBlockApp** is an application that displays a blog list and supports navigation to specific categories or detailed blog pages.  
+The project adopts **Clean Architecture** and the **MVVM** design pattern to achieve the following goals through a clear architectural structure:
+
+- **Testability**  
+- **Modular development**  
+- **High module reusability**  
+
+---
+
+## Design Approach
+
+1. **Module Decoupling**:  
+   - Rely on abstractions as much as possible. Modules define interfaces through protocols to avoid direct dependencies on specific classes.
+
+2. **Dependency Injection**:  
+   - Use Dependency Injection for class initialization to ensure module flexibility.  
+   - Provide an application-level injection manager to inject fundamental services (e.g., data services) into various modules.
+
+3. **Unified Navigation Management**:  
+   - Navigation between controllers is managed through a centralized **Coordinator**.  
+   - This avoids tight coupling between controllers, enhancing maintainability and scalability.
+
+4. **Global Configuration Options**:  
+   - Provide application-level configuration options, defining global system settings.  
+   - Load unified configurations inspired by the **info.plist** approach.
+
+---
+
+## Project Architecture
+
+The project is organized according to **Clean Architecture** and consists of the following three main layers:
+
+* **Domain Layer** = Entities + Use Cases + Repository Interfaces  
+* **Data Repositories Layer** = Repository Implementations + Data Sources  
+* **Presentation Layer (MVVM)** = ViewModels + Views  
+
+---
+
+### Dependency Diagram  
+
+![Dependency Diagram](README_FILE/CleanArchitectureDependencies.png?raw=true "Modules Dependencies")
+
+---
+
+### 1. Domain Layer
+
+The **Domain Layer** primarily contains business logic and entity models. This layer defines and encapsulates business rules.
+
+#### 1.1 Entities
+
+- `Blog.swift`: Defines the blog entity model.  
+- `BlogQuery.swift`: Defines the request parameters required to retrieve the blog list.  
+
+#### 1.2 Use Cases
+
+- `FetchBlogQueriesUseCase.swift`: Defines the core logic for retrieving the blog list, which represents the application's business behavior.  
+
+#### 1.3 Repository Interfaces
+
+- `BlogRepository.swift`: Defines the data source interface for retrieving the blog list.
+
+**Note**: The **Domain Layer** only specifies the method of accessing data (pure business layer) and does not concern itself with implementation details such as network requests or local data. These are implemented in the **Data Layer**.
+
+---
+
+### 2. Data Layer
+
+The **Data Layer** primarily handles data loading and acts as the data provider.  
+For demonstration purposes, this project uses local JSON data. If network APIs are later adopted, replacing the data source only requires implementing the **BlogRepository** interface in the Domain Layer, minimizing switching costs.
+
+#### 2.1 LocalData
+
+- `LocalDataConfig.swift`: Local data configuration.  
+- `LocalDataService.swift`: Local data service that implements the `BlogRepository` interface to load data from local sources.
+
+---
+
+### 3. Presentation Layer
+
+The **Presentation Layer** handles the user interface and includes both **Views** and **ViewModels**.
+
+#### 3.1 Views
+
+- `BlogWebViewController.swift, BlogListTableViewController.swift`:  
+   - `BlogWebViewController` handles navigation to blog details or categories.  
+   - `BlogListTableViewController` manages the blog list and binds to the ViewModel.  
+
+- `BlogListItemCell.swift, TagsView.swift`:  
+   - `BlogListItemCell`: Represents the blog list cell view.  
+   - `TagsView`: A flow layout control for displaying category tags.  
+
+#### 3.2 ViewModels
+
+- `BlogListViewModel.swift`: The ViewModel for the blog list, responsible for converting data into ViewModel objects for cells.  
+- `BlogListItemViewModel.swift`: The ViewModel for individual cells.
+
+**Note**: In the **Presentation Layer**, the `BlogWebViewController` and `BlogDetailsViewController` are classified as part of the View layer. Their main responsibility is to handle page rendering logic and user interactions, as the business logic has been separated.
+
+---
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Prerequisites
+
+- **Xcode** Version 16.2  
+- **Swift** 5.0+  
+
+---
+
+### Installation
+
+1. Clone the project  
+   ```sh
+   git clone https://github.com/suddenly1990/ArcBlockApp.git
