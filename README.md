@@ -40,7 +40,7 @@
 # ArcBlockApp
 
 一直以来，我都想写一篇关于 Clean Architecture 和 MVVM 的实践分享。之前在实际项目中，我持续使用这种架构，对其带来的优势有了更深的理解。如今借助一个简单的业务场景进行抽象，实现了这一架构的应用。
-在这样的架构下，业务逻辑与UI层高度解耦，使得更换 SwiftUI 变得极为轻松，几乎可以做到“无痛切换”。希望这次的分享能对大家在架构设计和开发实践中有所启发。
+在这样的架构下，业务逻辑与UI层高度解耦，使得更换页面变得极为轻松，几乎可以做到“无痛切换”。希望这次的分享能对大家在架构设计和开发实践中有所启发。
 
 **ArcBlockApp** 是一个用于展示博客列表的应用程序，支持点击分类标签和博客详情页面进行跳转。  
 该项目采用 **Clean Architecture** 和 **MVVM** 设计模式，旨在通过清晰的架构设计，实现以下目标：
@@ -163,7 +163,7 @@ MIT license Copyright (c) 2024
 # ArcBlockApp
 I have always wanted to share my experience in practicing Clean Architecture and the MVVM design pattern. Previously, I consistently applied this architecture in real-world projects, which deepened my understanding of its benefits. Now, using a simple business scenario, I’ve abstracted and demonstrated the implementation of this architecture.
 
-With this structure, the business logic is highly decoupled from the UI layer, making it incredibly easy to switch to SwiftUI—almost achieving a seamless and “painless” transition. I hope this demonstration can inspire others in their architectural design and development practices.
+With this structure, the business logic is highly decoupled from the UI layer, making it incredibly easy to switch to UI achieving a seamless and “painless” transition. I hope this demonstration can inspire others in their architectural design and development practices.
 
 **ArcBlockApp** is an application that displays a blog list and supports navigation to specific categories or detailed blog pages.  
 The project adopts **Clean Architecture** and the **MVVM** design pattern to achieve the following goals through a clear architectural structure:
